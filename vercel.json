@@ -14,7 +14,10 @@
   ],
   "functions": {
     "backend/main.py": {
-      "includeFiles": "frontend/**"
+      "includeFiles": [
+        "backend/**",
+        "frontend/**"
+      ]
     }
   }
 }
