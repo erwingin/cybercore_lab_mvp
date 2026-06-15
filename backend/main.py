@@ -1,3 +1,4 @@
+from pathlib import Path
 from __future__ import annotations
 import asyncio
 import copy
@@ -30,6 +31,13 @@ async def startup_database():
     else:
         await save_game_state(GAME_STATE, PLAYER_ID)
         print("[DB] No saved state. Default GAME_STATE inserted")
+
+BASE_DIR = Path(__file__).resolve().parent
+FRONTEND_DIR = BASE_DIR.parent / "frontend"
+
+@app.get("/health")
+async def health():
+    return {"ok": True, "message": "CyberCore backend running"}
 
 # ==========================================================
 # Game constants
@@ -2535,4 +2543,7 @@ def auth_telegram(payload: dict = Body(...)):
     }
 
 # WAJIB PALING BAWAH
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+else:
+    print(f"[WARNING] Frontend folder not found: {FRONTEND_DIR}")
