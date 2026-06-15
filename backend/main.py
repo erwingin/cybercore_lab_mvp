@@ -35,6 +35,11 @@ async def startup_database():
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent / "frontend"
 
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+else:
+    print(f"[WARNING] Frontend folder not found: {FRONTEND_DIR}")
+
 @app.get("/health")
 async def health():
     return {"ok": True, "message": "CyberCore backend running"}
