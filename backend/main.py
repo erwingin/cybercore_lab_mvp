@@ -1,5 +1,12 @@
 from __future__ import annotations
+
+import sys
 from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 import asyncio
 import copy
 import threading
@@ -7,10 +14,8 @@ import math
 import random
 import time
 from typing import Dict, List, Optional, Literal, Any
-try:
-    from database import init_db, load_game_state, save_game_state, PLAYER_ID
-except ModuleNotFoundError:
-    from backend.database import init_db, load_game_state, save_game_state, PLAYER_ID
+
+from database import init_db, load_game_state, save_game_state, PLAYER_ID
 from fastapi import FastAPI, HTTPException, Body
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
