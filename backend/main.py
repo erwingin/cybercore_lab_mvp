@@ -39,6 +39,10 @@ FRONTEND_DIR = BASE_DIR.parent / "frontend"
 async def health():
     return {"ok": True, "message": "CyberCore backend running"}
 
+@app.get("/")
+async def root():
+    return {"ok": True, "message": "CyberCore root running"}
+
 # ==========================================================
 # Game constants
 # ==========================================================
