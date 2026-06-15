@@ -1,20 +1,15 @@
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
-sys.path.insert(0, str(BASE_DIR))
-
 import asyncio
 import copy
 import threading
 import math
 import random
 import time
+from pathlib import Path
 from typing import Dict, List, Optional, Literal, Any
 
-from database import init_db, load_game_state, save_game_state, PLAYER_ID
+from backend.database import init_db, load_game_state, save_game_state, PLAYER_ID
 from fastapi import FastAPI, HTTPException, Body
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
